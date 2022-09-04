@@ -6,15 +6,16 @@
     "@testing-library/jest-dom": "5.11.9",
     "@testing-library/react": "11.2.5",
     "@testing-library/user-event": "12.8.0",
-    "axios": "0.21.1",
+    "axios": "^0.21.4",
     "bootstrap": "^5.1.3",
+    "dotenv": "^16.0.2",
     "react": "^18.0.0",
     "react-bootstrap": "^2.3.0",
     "react-cookie": "4.0.3",
     "react-cookies": "0.1.1",
     "react-dom": "^18.0.0",
     "react-router-dom": "^6.3.0",
-    "react-scripts": "5.0.1",
+    "react-scripts": "^2.1.3",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
@@ -40,5 +41,18 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  }
+  },
+  "description": "This repository has starter code to begin work on creating your own online bookshelf.",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Slow-Res/can-of-books-frontend.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Slow-Res/can-of-books-frontend/issues"
+  },
+  "homepage": "https://github.com/Slow-Res/can-of-books-frontend#readme"
 }
