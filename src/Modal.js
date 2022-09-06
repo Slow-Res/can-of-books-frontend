@@ -8,7 +8,15 @@ class FormModal extends React.Component {
     super(props);
     this.state = {
       show: false,
+      defaultValues: {},
     };
+  }
+  componentDidMount() {
+    console.log("inside Modal");
+  }
+
+  componentDidUpdate() {
+    console.log("inside Modal Update");
   }
 
   Hide = () => {
@@ -18,12 +26,20 @@ class FormModal extends React.Component {
     });
   };
 
-  HandleRegister = (e) => {
+  HandleSubmit = (e) => {
     e.preventDefault();
     let title = e.target.title.value;
     let desc = e.target.desc.value;
     let Status = e.target.status.value;
-    this.props.RegisterBook(title, desc, Status);
+    if (this.props.registarForm == true && this.props.updateForm == false)
+      this.props.RegisterBook(title, desc, Status);
+    else
+      this.props.UpdateBook({
+        _id: this.props.selectedBookData._id,
+        title: title,
+        description: desc,
+        status: Status,
+      });
   };
 
   render() {
@@ -38,10 +54,11 @@ class FormModal extends React.Component {
         <Modal.Header closeButton />
 
         <Modal.Body style={{ padding: "50px" }}>
-          <Form onSubmit={this.HandleRegister}>
+          <Form onSubmit={this.HandleSubmit}>
             <Form.Group className="mb-3">
               <Form.Label>Book Title</Form.Label>
               <Form.Control
+                defaultValue={this.props.selectedBookData.title}
                 type="text"
                 name="title"
                 placeholder="Enter Title"
@@ -50,11 +67,22 @@ class FormModal extends React.Component {
 
             <Form.Group className="mb-3">
               <Form.Label>Description</Form.Label>
-              <Form.Control type="text" name="desc" placeholder="Description" />
+              <Form.Control
+                defaultValue={this.props.selectedBookData.description}
+                type="text"
+                name="desc"
+                placeholder="Description"
+              />
             </Form.Group>
 
             <Form.Group className="mb-3">
-              <Form.Control type="text" name="status" placeholder="Status" />
+              <Form.Label>Book Status</Form.Label>
+              <Form.Control
+                defaultValue={this.props.selectedBookData.status}
+                type="text"
+                name="status"
+                placeholder="Status"
+              />
             </Form.Group>
             <button className="btn btn-primary" type="submit">
               Submit

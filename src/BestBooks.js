@@ -9,6 +9,9 @@ class BestBooks extends React.Component {
     super(props);
     this.state = {
       books: [],
+      registarForm: false,
+      updateForm: false,
+      selectedBookData: {},
     };
   }
 
@@ -64,22 +67,48 @@ class BestBooks extends React.Component {
       });
   };
 
-  onClicked = () => {
+  RegistarClick = () => {
     console.log("Show Modal");
     this.setState({
       show: true,
+      registarForm: true,
+      updateForm: false,
+      selectedBookData: {},
     });
   };
+
+  UpdateClick = (book) => {
+    console.log("Show Modal");
+    this.setState({
+      show: true,
+      registarForm: false,
+      updateForm: true,
+      selectedBookData: book,
+    });
+  };
+
   HideModal = () => {
     console.log("Hide Modal");
     this.setState({
       show: false,
     });
   };
-  index = 1;
-  handleSelect = (selectedIndex, e) => {
-    this.index = selectedIndex;
+
+  UpdateBook = (obj) => {
+    const id = obj._id;
+    axios
+      .put(process.env.REACT_APP_API_URL + `updateBook/${id}`, obj)
+      .then((result) => {
+        this.setState({
+          books: result.data,
+          show: false,
+        });
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
+
   render() {
     console.log("REDNERING");
 
@@ -91,19 +120,28 @@ class BestBooks extends React.Component {
         <Carousel.Item key={book._id}>
           <img
             className="d-block w-100"
-            src="https://cdn.pixabay.com/photo/2015/11/19/21/10/glasses-1052010_960_720.jpg"
+            src="https://about.proquest.com/globalassets/proquest/media/images/decrotive/oldbooks.jpg"
             alt="First slide"
             width="800px"
-            height="600px"
+            height="900px"
           />
           <Carousel.Caption>
-            <h3>{book.title}</h3>
-            <p>{book.description}</p>
+            <p style={{ fontSize: "100px" }}>{book.title}</p>
+            <p style={{ fontSize: "45px" }}>{book.description}</p>
             <button
               className="btn btn-danger"
               onClick={() => this.deleteBook(book._id)}
+              style={{ margin: "15px", padding: "10px 20px 10px 20px" }}
             >
               Delete
+            </button>
+
+            <button
+              onClick={() => this.UpdateClick(book)}
+              className="btn btn-secondary"
+              style={{ margin: "15px", padding: "10px 20px 10px 20px" }}
+            >
+              Update
             </button>
           </Carousel.Caption>
         </Carousel.Item>
@@ -113,14 +151,19 @@ class BestBooks extends React.Component {
     return (
       <>
         <div style={{ textAlign: "center", padding: "50px" }}>
-          <button onClick={this.onClicked} className="btn btn-primary">
+          <button onClick={this.RegistarClick} className="btn btn-primary">
             Add New Book Now!
           </button>
         </div>
+
         <FormModal
           show={this.state.show}
           hideIt={this.HideModal}
           RegisterBook={this.addBook}
+          UpdateBook={this.UpdateBook}
+          registarForm={this.state.registarForm}
+          updateForm={this.state.updateForm}
+          selectedBookData={this.state.selectedBookData}
         />
 
         <Carousel>{slides}</Carousel>
