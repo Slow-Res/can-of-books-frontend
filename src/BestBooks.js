@@ -88,7 +88,7 @@ class BestBooks extends React.Component {
     let slides = arr.map((book) => {
       console.log(book);
       return (
-        <Carousel.Item>
+        <Carousel.Item key={book._id}>
           <img
             className="d-block w-100"
             src="https://cdn.pixabay.com/photo/2015/11/19/21/10/glasses-1052010_960_720.jpg"
