@@ -14,7 +14,6 @@ class App extends React.Component {
           <Header />
           <Routes>
             <Route exact path="/" element={<BestBooks />} />
-
             <Route exact path="/about" element={<Profile />} />
           </Routes>
 
