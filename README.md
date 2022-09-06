@@ -1,11 +1,47 @@
-# Start your own "Can of Books" App
+# Can-Books (Books Library)
 
-This repository has starter code to begin work on creating your own online bookshelf.
+**Author**: Abdelrahman Alasal
+**Version**: 1.1.0 
 
-## What can books do?
+## Overview
 
-Books are life-changing. They have the power to enlighten, educate, entertain, heal, and help us grow. Build out this code base to create an web app to track what books have impacted you, and what's recommended to read next.
+> A React App that uses the Books REST API's to intertact with the data, currently it only fetching the data
 
-## Use this template
+## Getting Started
 
-Clone this repo to your own account with the green "Use this template" button. Then, add any collaborators. Now you are ready to start adding features! Deploy your site to let the world know which books have had the greatest impact on you, and what's recommended. Enjoy!
+<br>
+
+> All Packages included in the package.json  <br>
+
+> Run in the terminal : npm install  <br>
+
+> Provide the backend API URL to the .env (REACT_APP_API_URL= **URL HERE ** )  <br>
+
+## Architecture
+
+> We are using Axious to make requests  <br>
+
+> We are using Bootsrap for the styling <br>
+
+> We are using react-dom-router for navigation <br>
+
+> We are using class based React    <br>
+
+
+## Change Log
+
+<br>
+
+> Fetching Data in the didComponentMount, inside BestBooks.js  <br>
+
+> We are using Carousel  Bootstrap to populate the data in slides <br>
+
+
+
+## Estimates
+
+> 1 Hour
+
+## Credit and Collaborations
+
+> This lab has been done by Islam alghoul, Abdelrhaman alasal
