@@ -43,16 +43,5 @@
     ]
   },
   "description": "This repository has starter code to begin work on creating your own online bookshelf.",
-  "main": "index.js",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/Slow-Res/can-of-books-frontend.git"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/Slow-Res/can-of-books-frontend/issues"
-  },
-  "homepage": "https://github.com/Slow-Res/can-of-books-frontend#readme"
+  "main": "index.js"
 }
