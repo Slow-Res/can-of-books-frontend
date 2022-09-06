@@ -1,11 +1,13 @@
 # Can-Books (Books Library)
 
 **Author**: Abdelrahman Alasal
-**Version**: 1.1.0 
+**Version**: 1.2.0 
 
 ## Overview
 
-> A React App that uses the Books REST API's to intertact with the data, currently it only fetching the data
+> A React App that uses the Books REST API's to intertact with the data.
+> Currently it fetching data , creating new data (books) , deleting data by id 
+
 
 ## Getting Started
 
@@ -36,11 +38,17 @@
 
 > We are using Carousel  Bootstrap to populate the data in slides <br>
 
+> We added Axios post, to send post request to the server <br>
+
+> We are using Modal and forms  Bootstrap to create a registar form for new books <br>
+
+> We added Axios delete, to delete books by their id  <br>
+
 
 
 ## Estimates
 
-> 1 Hour
+> 1 : 30 Hour
 
 ## Credit and Collaborations
 
