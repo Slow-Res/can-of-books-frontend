@@ -128,7 +128,6 @@ class BestBooks extends React.Component {
     this.index = selectedIndex;
   };
   render() {
-    this.PrepareUI();
     console.log("REDNERING");
     return (
       <>
