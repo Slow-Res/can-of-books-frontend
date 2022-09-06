@@ -41,7 +41,5 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  },
-  "description": "This repository has starter code to begin work on creating your own online bookshelf.",
-  "main": "index.js"
+  }
 }
