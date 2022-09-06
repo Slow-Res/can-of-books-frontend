@@ -16,13 +16,10 @@ class BestBooks extends React.Component {
     let url = process.env.REACT_APP_API_URL;
     let result = await axios.get(url + "books");
     console.log(result.data);
-    this.setState(
-      {
-        show: false,
-        books: result.data,
-      },
-      this.PrepareUI
-    );
+    this.setState({
+      show: false,
+      books: result.data,
+    });
   }
 
   addBook = (title, desc, status) => {
@@ -37,16 +34,10 @@ class BestBooks extends React.Component {
     axios
       .post(process.env.REACT_APP_API_URL + `book`, data)
       .then((result) => {
-        this.setState(
-          {
-            books: result.data,
-            show: false,
-          },
-          () => {
-            console.log(this.state.books);
-            this.PrepareUI();
-          }
-        );
+        this.setState({
+          books: result.data,
+          show: false,
+        });
       })
       .catch((err) => {
         console.log(err);
@@ -63,52 +54,14 @@ class BestBooks extends React.Component {
       .then((result) => {
         console.log("after delete");
         console.log(result);
-        this.setState(
-          {
-            books: result.data,
-          },
-          () => {
-            console.log(this.state.books);
-            this.PrepareUI();
-          }
-        );
+        this.setState({
+          books: result.data,
+        });
       })
       .catch((err) => {
         console.log("after delete");
         console.log(err);
       });
-  };
-  slides = [];
-  PrepareUI = () => {
-    try {
-      console.log("Creating data");
-      let arr = this.state.books.length == 0 ? [] : this.state.books;
-      this.slides = arr.map((book) => {
-        return (
-          <Carousel.Item>
-            <img
-              className="d-block w-100"
-              src="https://cdn.pixabay.com/photo/2015/11/19/21/10/glasses-1052010_960_720.jpg"
-              alt="First slide"
-              width="800px"
-              height="600px"
-            />
-            <Carousel.Caption>
-              <h3>{book.title}</h3>
-              <p>{book.description}</p>
-              <button
-                className="btn btn-danger"
-                onClick={() => this.deleteBook(book._id)}
-              >
-                Delete
-              </button>
-            </Carousel.Caption>
-          </Carousel.Item>
-        );
-      });
-    } catch (error) {
-      console.log(error);
-    }
   };
 
   onClicked = () => {
@@ -129,6 +82,34 @@ class BestBooks extends React.Component {
   };
   render() {
     console.log("REDNERING");
+
+    console.log("Creating data");
+    let arr = this.state.books;
+    let slides = arr.map((book) => {
+      console.log(book);
+      return (
+        <Carousel.Item>
+          <img
+            className="d-block w-100"
+            src="https://cdn.pixabay.com/photo/2015/11/19/21/10/glasses-1052010_960_720.jpg"
+            alt="First slide"
+            width="800px"
+            height="600px"
+          />
+          <Carousel.Caption>
+            <h3>{book.title}</h3>
+            <p>{book.description}</p>
+            <button
+              className="btn btn-danger"
+              onClick={() => this.deleteBook(book._id)}
+            >
+              Delete
+            </button>
+          </Carousel.Caption>
+        </Carousel.Item>
+      );
+    });
+
     return (
       <>
         <div style={{ textAlign: "center", padding: "50px" }}>
@@ -142,7 +123,7 @@ class BestBooks extends React.Component {
           RegisterBook={this.addBook}
         />
 
-        <Carousel>{this.slides}</Carousel>
+        <Carousel>{slides}</Carousel>
       </>
     );
   }
