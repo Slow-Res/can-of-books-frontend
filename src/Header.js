@@ -1,7 +1,9 @@
 import React from "react";
 import { Navbar, NavItem } from "react-bootstrap";
 import { Link } from "react-router-dom";
-
+import LoginButton from "./LoginButton";
+import LogoutButton from "./LogoutButton";
+import "bootstrap/dist/css/bootstrap.min.css";
 class Header extends React.Component {
   render() {
     return (
@@ -18,7 +20,6 @@ class Header extends React.Component {
         }}
       >
         <Navbar.Brand>
-          {" "}
           <Link to="/" className="nav-link">
             My Favorite Books
           </Link>
@@ -32,6 +33,14 @@ class Header extends React.Component {
           <Link to="/about" className="nav-link">
             About
           </Link>
+        </NavItem>
+
+        <NavItem>
+          <LoginButton />
+        </NavItem>
+
+        <NavItem>
+          <LogoutButton />
         </NavItem>
       </Navbar>
     );

@@ -3,6 +3,7 @@ import Carousel from "react-bootstrap/Carousel";
 import "bootstrap/dist/css/bootstrap.min.css";
 import axios from "axios";
 import FormModal from "./Modal";
+import { withAuth0 } from "@auth0/auth0-react";
 
 class BestBooks extends React.Component {
   constructor(props) {
@@ -16,8 +17,9 @@ class BestBooks extends React.Component {
   }
 
   async componentDidMount() {
+    const { user } = this.props.auth0;
     let url = process.env.REACT_APP_API_URL;
-    let result = await axios.get(url + "books");
+    let result = await axios.get(url + `books/${user.email}`);
     console.log(result.data);
     this.setState({
       show: false,
@@ -26,16 +28,19 @@ class BestBooks extends React.Component {
   }
 
   addBook = (title, desc, status) => {
+    const { user } = this.props.auth0;
     console.log("time to add new book");
     let data = {
       title: title,
       description: desc,
       status: status,
+      email: user.email,
+      name: user.name,
     };
     console.log(data);
     console.log(process.env.REACT_APP_API_URL + `book`);
     axios
-      .post(process.env.REACT_APP_API_URL + `book`, data)
+      .post(process.env.REACT_APP_API_URL + `book/${user.email}`, data)
       .then((result) => {
         this.setState({
           books: result.data,
@@ -51,9 +56,10 @@ class BestBooks extends React.Component {
   };
 
   deleteBook = (id) => {
+    const { user } = this.props.auth0;
     console.log(id);
     axios
-      .delete(process.env.REACT_APP_API_URL + `deleteBook/${id}`)
+      .delete(process.env.REACT_APP_API_URL + `deleteBook/${id}/${user.email}`)
       .then((result) => {
         console.log("after delete");
         console.log(result);
@@ -95,9 +101,13 @@ class BestBooks extends React.Component {
   };
 
   UpdateBook = (obj) => {
+    const { user } = this.props.auth0;
     const id = obj._id;
     axios
-      .put(process.env.REACT_APP_API_URL + `updateBook/${id}`, obj)
+      .put(
+        process.env.REACT_APP_API_URL + `updateBook/${id}/${user.email}`,
+        obj
+      )
       .then((result) => {
         this.setState({
           books: result.data,
@@ -110,6 +120,10 @@ class BestBooks extends React.Component {
   };
 
   render() {
+    console.log("BestBooks");
+    //console.log(this.props.auth0);
+    //const { user } = this.props.auth0;
+
     console.log("REDNERING");
 
     console.log("Creating data");
@@ -150,26 +164,30 @@ class BestBooks extends React.Component {
 
     return (
       <>
-        <div style={{ textAlign: "center", padding: "50px" }}>
-          <button onClick={this.RegistarClick} className="btn btn-primary">
-            Add New Book Now!
-          </button>
-        </div>
+        {true && (
+          <>
+            <div style={{ textAlign: "center", padding: "50px" }}>
+              <button onClick={this.RegistarClick} className="btn btn-primary">
+                Add New Book Now!
+              </button>
+            </div>
 
-        <FormModal
-          show={this.state.show}
-          hideIt={this.HideModal}
-          RegisterBook={this.addBook}
-          UpdateBook={this.UpdateBook}
-          registarForm={this.state.registarForm}
-          updateForm={this.state.updateForm}
-          selectedBookData={this.state.selectedBookData}
-        />
+            <FormModal
+              show={this.state.show}
+              hideIt={this.HideModal}
+              RegisterBook={this.addBook}
+              UpdateBook={this.UpdateBook}
+              registarForm={this.state.registarForm}
+              updateForm={this.state.updateForm}
+              selectedBookData={this.state.selectedBookData}
+            />
 
-        <Carousel>{slides}</Carousel>
+            <Carousel>{slides}</Carousel>
+          </>
+        )}
       </>
     );
   }
 }
 
-export default BestBooks;
+export default withAuth0(BestBooks);

@@ -1,13 +1,15 @@
 # Can-Books (Books Library)
 
 **Author**: Abdelrahman Alasal
-**Version**: 1.3.0 
+**Version**: 1.4.0 
 
 ## Overview
 
 > A React App that uses the Books REST API's to intertact with the data. <br>
 
 > React APP now do Full CRUD against the node server <br>
+
+> It uses OAuth0 to login to the website
 
 
 
@@ -32,6 +34,8 @@
 
 > We are using class based React    <br>
 
+> Everything Requires Authentaction <br>
+
 
 ## Change Log
 
@@ -51,11 +55,15 @@
 
 > Same Form is used to add new books and to update current one <br>
 
+> Added login to the website using OAuth0 <br>
+
+> All CRUD now sends the email as parameter to have response
+
 
 
 ## Estimates
 
-> 1 : 30 Hour
+> 40 Min
 
 ## Credit and Collaborations
 

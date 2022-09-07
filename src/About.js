@@ -1,10 +1,10 @@
 import React from "react";
+import { useAuth0 } from "@auth0/auth0-react";
 
-class Profile extends React.Component {
-  render() {
-    /* TODO: render information about the developers */
-    return <p>Profile page coming soon</p>;
-  }
+function Profile() {
+  const { user } = useAuth0();
+
+  return <div>Hello {user.name}</div>;
 }
 
 export default Profile;
